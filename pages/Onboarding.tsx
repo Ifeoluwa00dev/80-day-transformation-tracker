@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 const Onboarding: React.FC = () => {
-  const { saveUser } = useApp();
+  const { saveUser, firebaseUser } = useApp();
 
   const [step, setStep] = useState(1);
   const [animate, setAnimate] = useState(false);
@@ -40,6 +40,11 @@ const Onboarding: React.FC = () => {
   }, [step]);
 
   const nextStep = () => {
+    if (!firebaseUser && step >= 2) {
+    setAuthError("Please login first to save your progress.");
+    setStep(1);
+    return;
+  }
     setAnimate(false);
     setTimeout(() => setStep((s) => s + 1), 200);
   };
@@ -54,6 +59,8 @@ const Onboarding: React.FC = () => {
       } else {
         await createUserWithEmailAndPassword(auth, email, password);
       }
+      setStep(2);
+
       // Success: Firebase auth state is now set.
       // AppContext (later) can listen and sync cloud data.
     } catch (err: any) {
@@ -134,6 +141,11 @@ const Onboarding: React.FC = () => {
         >
           {isLogin ? "No account? Sign up" : "Already have an account? Login"}
         </button>
+        {firebaseUser && (
+  <div className="text-sm text-green-700 mt-3">
+    Logged in ✅ {firebaseUser.email}
+  </div>
+)}
       </div>
       )}
 

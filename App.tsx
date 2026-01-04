@@ -46,7 +46,11 @@ const BottomNav = () => {
 };
 
 const AppRoutes = () => {
-  const { state } = useApp();
+  const { state, hydrated} = useApp();
+  
+  if (!hydrated) {
+    return <div className="min-h-screen grid place-items-center"> Loading......</div>
+  }
   
   if (!state.user) {
     return <Onboarding />;

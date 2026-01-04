@@ -79,45 +79,8 @@ const Onboarding: React.FC = () => {
         style={{ animationDelay: "1s" }}
       />
 
-      {/* Auth Box (Email/Password) */}
-      <div className="relative z-10 bg-white/80 backdrop-blur-sm border border-white rounded-2xl p-4 shadow-lg mb-6">
-        <div className="text-sm font-bold text-gray-800 mb-3">
-          {isLogin ? "Login" : "Create Account"}
-        </div>
-
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 rounded-xl border-2 border-gray-200 bg-white outline-none focus:border-blue-500 mb-3"
-        />
-
-        <input
-          type="password"
-          placeholder="Password (min 6 chars)"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 rounded-xl border-2 border-gray-200 bg-white outline-none focus:border-blue-500 mb-3"
-        />
-
-        {authError && <div className="text-sm text-red-600 mb-3">{authError}</div>}
-
-        <button
-          onClick={handleEmailAuth}
-          disabled={authLoading || !email || password.length < 6}
-          className="w-full py-3 rounded-xl bg-black text-white font-semibold disabled:opacity-50"
-        >
-          {authLoading ? "Please wait..." : isLogin ? "Login" : "Create Account"}
-        </button>
-
-        <button
-          onClick={() => setIsLogin((v) => !v)}
-          className="w-full mt-2 text-sm text-blue-700"
-        >
-          {isLogin ? "No account? Sign up" : "Already have an account? Login"}
-        </button>
-      </div>
+      
+     
 
       {/* Progress indicator */}
       <div className="flex gap-2 mb-8 relative z-10">
